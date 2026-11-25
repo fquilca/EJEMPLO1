@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gestión de talleres | Semana 10</title>
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<header><h1>Gestión de talleres culturales</h1><p>Aplicaciones Web · Semana 10 · JavaScript + API Supabase</p></header>
+<main>
+<section class="panel" id="panelAcceso">
+ <h2>Acceso al sistema</h2>
+ <form id="formAcceso"><label>Correo <input name="email" type="email" required></label>
+ <label>Contraseña <input name="password" type="password" minlength="6" required></label>
+ <button>Ingresar</button></form>
+ <small>El docente crea previamente los usuarios de prueba en Supabase Authentication.</small>
+</section>
+<section id="app" hidden>
+ <div class="barra"><span id="usuarioActual"></span><button id="salir" type="button">Cerrar sesión</button></div>
+ <nav><a href="#participantes">Participantes</a><a href="#instructores">Instructores</a><a href="#talleres">Talleres</a><a href="#horarios">Horarios</a><a href="#inscripciones">Inscripciones</a></nav>
+ <section class="panel" id="participantes"><h2>1. Registro de participantes</h2>
+  <form id="formParticipantes"><input name="id" type="hidden">
+   <label>Nombre completo <input name="nombre" minlength="3" required></label>
+   <label>Correo <input name="correo" type="email" required></label>
+   <label>Teléfono <input name="telefono" inputmode="numeric" pattern="[0-9]{9}" placeholder="9 dígitos"></label>
+   <button>Guardar participante</button><button type="reset" class="sec">Limpiar</button></form>
+  <div id="listaParticipantes" class="listado"></div></section>
+ <section class="panel" id="instructores"><h2>2. Registro de instructores</h2>
+  <form id="formInstructores"><input name="id" type="hidden">
+   <label>Nombre <input name="nombre" minlength="3" required></label>
+   <label>Especialidad <input name="especialidad" required></label>
+   <label>Correo <input name="correo" type="email" required></label>
+   <button>Guardar instructor</button><button type="reset" class="sec">Limpiar</button></form>
+  <div id="listaInstructores" class="listado"></div></section>
+ <section class="panel" id="talleres"><h2>3. Registro de talleres</h2>
+  <form id="formTalleres"><input name="id" type="hidden">
+   <label>Nombre del taller <input name="nombre" required></label>
+   <label>Categoría <select name="categoria" required><option value="">Seleccionar</option><option>Arte</option><option>Deporte</option><option>Cultura</option></select></label>
+   <label>Cupos <input name="cupos" type="number" min="1" max="100" required></label>
+   <label>Instructor <select name="instructor_id" id="selInstructor" required></select></label>
+   <button>Guardar taller</button><button type="reset" class="sec">Limpiar</button></form>
+  <div id="listaTalleres" class="listado"></div></section>
+ <section class="panel" id="horarios"><h2>4. Programación de horarios</h2>
+  <form id="formHorarios"><input name="id" type="hidden">
+   <label>Taller <select name="taller_id" class="selTaller" required></select></label>
+   <label>Día <select name="dia" required><option value="">Seleccionar</option><option>Lunes</option><option>Martes</option><option value="Miercoles">Miércoles</option><option>Jueves</option><option>Viernes</option><option value="Sabado">Sábado</option></select></label>
+   <label>Hora <input name="hora" type="time" required></label>
+   <label>Ambiente <input name="ambiente" required></label>
+   <button>Guardar horario</button><button type="reset" class="sec">Limpiar</button></form>
+  <div id="listaHorarios" class="listado"></div></section>
+ <section class="panel" id="inscripciones"><h2>5. Inscripción de participantes</h2>
+  <form id="formInscripciones"><input name="id" type="hidden">
+   <label>Participante <select name="participante_id" id="selParticipante" required></select></label>
+   <label>Taller <select name="taller_id" class="selTaller" required></select></label>
+   <label>Fecha <input name="fecha" type="date" required></label>
+   <button>Guardar inscripción</button><button type="reset" class="sec">Limpiar</button></form>
+  <div id="listaInscripciones" class="listado"></div></section>
+ <button type="button" id="actualizar" class="sec">Actualizar todas las listas</button> <button type="button" id="probarFetch">Probar GET con fetch()</button>
+</section>
+<p id="estado" role="status" aria-live="polite"></p>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="app.js"></script>
+</body></html>
